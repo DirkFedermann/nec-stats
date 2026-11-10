@@ -1,0 +1,14 @@
+/**
+ * Minified by jsDelivr using clean-css v5.3.3.
+ * Original file: /npm/@chartist-js/tooltips@2.2.0/dist/styles.css
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+.ct-tooltip{position:fixed;inset:auto;top:0;left:0;translate:var(--ct-tooltip-x,0) var(--ct-tooltip-y,0);box-sizing:border-box;max-width:var(--ct-tooltip-max-width,16rem);margin:0;padding:var(--ct-tooltip-padding,.375rem .625rem);overflow:visible;border:var(--ct-tooltip-border,0);border-radius:var(--ct-tooltip-radius,.375rem);box-shadow:var(--ct-tooltip-shadow,0 4px 12px rgba(0,0,0,.18));background:var(--ct-tooltip-background,rgba(24,22,20,.94));color:var(--ct-tooltip-color,#fff);font:var(
+    --ct-tooltip-font,
+    500 0.8125rem/1.35 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif
+  );text-align:left;pointer-events:auto;opacity:1;visibility:visible;transition:opacity 120ms ease-out,visibility 0s}@supports (color:light-dark(#000,#fff)){.ct-tooltip{background:var(--ct-tooltip-background,light-dark(rgba(24,22,20,.94),rgba(250,248,244,.96)));color:var(--ct-tooltip-color,light-dark(#fff,#18161a))}}.ct-tooltip.ct-tooltip-hidden:not(:hover){opacity:0;visibility:hidden;transition:opacity 120ms ease-in var(--ct-tooltip-hide-delay, 300ms),visibility 0s calc(var(--ct-tooltip-hide-delay, 300ms) + 120ms)}.ct-tooltip[hidden]{display:none}@media (prefers-reduced-motion:reduce){.ct-tooltip,.ct-tooltip.ct-tooltip-hidden:not(:hover){transition:none}}.ct-tooltip-title,.ct-tooltip-value{display:block}.ct-tooltip-title{font-weight:600}.ct-tooltip-value{font-variant-numeric:tabular-nums}.ct-tooltip-series{display:flex;align-items:center;gap:.4em}.ct-tooltip-series::before{content:'';flex:none;width:.65em;height:.65em;border-radius:2px;background:var(--ct-tooltip-series-color,currentColor)}.ct-tooltip-text{white-space:pre-line}.ct-tooltip-target:focus{outline:0}.ct-tooltip-target:focus-visible{outline:var(--ct-tooltip-focus-width,2px) solid var(--ct-tooltip-focus-color,#18161a);outline-offset:2px}@supports (color:light-dark(#000,#fff)){.ct-tooltip-target:focus-visible{outline-color:var(--ct-tooltip-focus-color,light-dark(#18161a,#faf8f4))}}.ct-point.ct-tooltip-target:focus-visible{stroke-width:calc(var(--ct-point-size,10px) * 1.6)}.ct-bar.ct-tooltip-target:focus-visible{stroke-width:calc(var(--ct-bar-width,10px) + 4px)}
+/*# sourceMappingURL=/sm/1393eb3c2bce235b6fc2c9868a2947135c24f3cd23cf04ed21d04cde452b9931.map */

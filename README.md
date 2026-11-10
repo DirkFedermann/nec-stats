@@ -99,3 +99,23 @@ distinct `Team ID` values from team rows as teams. Laps completed and `Inc`
 incident points are summed from team rows across the selected events, so the
 same team's totals are not counted again for each driver row. Files outside
 `weekN` directories, including season standings, are ignored.
+
+### Season statistics web page
+
+Install the page generator dependency with:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+Generate a season page from the raw result CSV files:
+
+```bash
+python3 generate_stats_page.py --year 2026
+```
+
+The generator reads `results/<year>/week<number>/...`, uses each result CSV's
+`Start Time` metadata to label one- or two-day race weeks, and writes
+`web/<year>.html`. The Jinja2 template is `web/stats_template.html`; override
+the input directory, template, or output path with `--input-dir`, `--template`,
+or `--output`.
