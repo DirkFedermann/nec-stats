@@ -33,11 +33,15 @@ class GenerateStatsPageTests(unittest.TestCase):
             template.write_text(
                 """
                 <h1>{{ year }}</h1>
+                <table id="participation-summary">
+                {% for week in weeks %}<tr><td>{{ week.label }}</td><td>{{ week.participation }}</td></tr>{% endfor %}
+                </table>
                 <div id="accordionYear">
                 {% for week in weeks %}
                     <section id="week{{ week.number }}">
                         {{ week.label }} ({{ week.date_label }})
                         <span>{{ week.teams }}</span>
+                        <span class="participation">{{ week.participation }}</span>
                         {% for class in week.classes %}{{ class.label }}{% endfor %}
                     </section>
                 {% endfor %}
@@ -78,6 +82,11 @@ class GenerateStatsPageTests(unittest.TestCase):
         self.assertIn('id="week1"', rendered)
         self.assertIn('id="week2"', rendered)
         self.assertEqual(rendered.count("<section"), 2)
+        self.assertIn(
+            '<table id="participation-summary">\n<tr><td>Week 1</td><td>2</td></tr><tr><td>Week 2</td><td>1</td></tr>',
+            rendered,
+        )
+        self.assertEqual(rendered.count('class="participation"'), 2)
         self.assertIn("GT3", rendered)
         self.assertIn("PCup", rendered)
         self.assertNotIn("2025", rendered)
@@ -119,6 +128,50 @@ class GenerateStatsPageTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(output.read_text(encoding="utf-8"), "Week 1")
             self.assertIn("Wrote", result.stdout)
+
+    def test_template_shows_timeslot_table_and_graph_above_accordion(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            results = root / "results"
+            template = (
+                Path(__file__).resolve().parents[1] / "web" / "stats_template.html"
+            )
+            output = root / "2026.html"
+            self._write_results(
+                results / "2026" / "week1" / "saturday" / "0700" / "results.csv",
+                "2026-03-21T07:00:00Z",
+                [["BMW", "NEC GT3 2026", "-8", "-8", "2", "25"]],
+            )
+            self._write_results(
+                results / "2026" / "week1" / "sunday" / "0000" / "results.csv",
+                "2026-03-22T00:00:00Z",
+                [["BMW", "NEC GT3 2026", "-9", "-9", "2", "25"]],
+            )
+            self._write_results(
+                results / "2026" / "week2" / "monday" / "1300" / "results.csv",
+                "2026-04-06T13:00:00Z",
+                [["BMW", "NEC GT3 2026", "-10", "-10", "2", "25"]],
+            )
+
+            generate_page("2026", results, template, output)
+            rendered = output.read_text(encoding="utf-8")
+
+        summary_position = rendered.index("<h2>Participation by timeslot</h2>")
+        accordion_position = rendered.index(
+            '<div class="accordion" id="accordionYear">'
+        )
+        self.assertLess(summary_position, accordion_position)
+        self.assertIn('id="timeslotParticipation"', rendered)
+        self.assertIn("Saturday 07:00 GMT", rendered)
+        self.assertIn("Sunday 00:00 GMT", rendered)
+        self.assertIn("Monday 13:00 GMT", rendered)
+        self.assertIn("<td>Saturday</td>", rendered)
+        self.assertIn("Average team entries", rendered)
+        self.assertIn('id="timeslotParticipationWeek1"', rendered)
+        self.assertIn('id="timeslotParticipationWeek2"', rendered)
+        self.assertIn("labels: [\"Saturday 07:00 GMT\", \"Sunday 00:00 GMT\"]", rendered)
+        self.assertIn("labels: [\"Monday 13:00 GMT\"]", rendered)
+        self.assertIn("Participation (team entries):</td><td>1</td>", rendered)
 
     @staticmethod
     def _write_results(path: Path, start_time: str, rows: list[list[str]]) -> None:

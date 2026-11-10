@@ -21,6 +21,7 @@ from jinja2 import (
 )
 
 from analyze_results import WeekStats, car_rows, discover_weekly_files
+from analyze_timeslots import timeslot_participation
 
 
 MONTH_NAMES = (
@@ -149,6 +150,7 @@ def _build_week_data(
         "drivers": stats.driver_rows,
         "unique_drivers": len(stats.driver_ids),
         "teams": stats.team_entries,
+        "participation": stats.team_entries,
         "splits": stats.files_processed,
         "laps": stats.team_laps,
         "incidents": stats.team_incidents,
@@ -168,7 +170,11 @@ def _build_week_data(
     }
 
 
-def _build_context(year: str, weekly_files: dict[tuple[str, str], list[Path]]) -> dict[str, Any]:
+def _build_context(
+    year: str,
+    weekly_files: dict[tuple[str, str], list[Path]],
+    input_dir: Path,
+) -> dict[str, Any]:
     selected_weeks = sorted(
         (
             (week_name, files)
@@ -187,6 +193,20 @@ def _build_context(year: str, weekly_files: dict[tuple[str, str], list[Path]]) -
         for path in files:
             stats.add_csv(path)
         week = _build_week_data(year, week_name, stats, files)
+        week_timeslot_rows = timeslot_participation(
+            input_dir, weekly_files, year=year, week=week["number"]
+        )
+        week["timeslot_rows"] = week_timeslot_rows
+        week["timeslot_labels"] = [
+            f"{row['day']} {str(row['timeslot'])[:2]}:{str(row['timeslot'])[2:]} GMT"
+            for row in week_timeslot_rows
+        ]
+        week["timeslot_participation_series"] = [
+            {
+                "name": "Average team entries",
+                "data": [row["average_team_entries"] for row in week_timeslot_rows],
+            }
+        ]
         if week["number"] in seen_numbers:
             raise ValueError(f"duplicate race week number: {week['number']}")
         seen_numbers.add(week["number"])
@@ -211,6 +231,11 @@ def _build_context(year: str, weekly_files: dict[tuple[str, str], list[Path]]) -
         for class_name in class_names
     }
     average_teams = sum(week["teams"] for week in weeks) / len(weeks)
+    timeslot_rows = timeslot_participation(input_dir, weekly_files, year=year)
+    timeslot_labels = [
+        f"{row['day']} {str(row['timeslot'])[:2]}:{str(row['timeslot'])[2:]} GMT"
+        for row in timeslot_rows
+    ]
 
     return {
         "year": year,
@@ -240,6 +265,20 @@ def _build_context(year: str, weekly_files: dict[tuple[str, str], list[Path]]) -
             }
             for class_definition in class_definitions
         ],
+        "timeslot_rows": sorted(
+            timeslot_rows,
+            key=lambda row: (
+                -float(row["average_team_entries"]),
+                str(row["timeslot"]),
+            ),
+        ),
+        "timeslot_labels": timeslot_labels,
+        "timeslot_participation_series": [
+            {
+                "name": "Average team entries",
+                "data": [row["average_team_entries"] for row in timeslot_rows],
+            }
+        ],
     }
 
 
@@ -250,7 +289,7 @@ def generate_page(
     output_path: Path,
 ) -> None:
     weekly_files = discover_weekly_files(input_dir, output_path)
-    context = _build_context(year, weekly_files)
+    context = _build_context(year, weekly_files, input_dir)
 
     environment = Environment(
         loader=FileSystemLoader(template_path.parent),

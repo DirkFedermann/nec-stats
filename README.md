@@ -64,6 +64,23 @@ as `Other: <Car Class>` rather than discarded. Blank `Inc` values count as
 zero; malformed IDs, non-integer incident counts, or missing required columns
 are reported as errors.
 
+### Timeslot participation
+
+Count team entries in each race timeslot and write a CSV report per year:
+
+```bash
+python3 analyze_timeslots.py
+```
+
+By default, the script reads beneath `results/`, compares average team-entry
+participation by day and GMT timeslot across the selected year, and writes
+`stats/<year>/<year>_timeslot_participation.csv`.
+Use `--year 2026` / `-y 2026` or `--week 2` / `-w 2` to filter the report,
+and `--input-dir` or `--output-dir` to change the input or output location.
+The report includes the day, total team entries, number of events, and average
+team entries per event for each day/timeslot. The season web page shows the
+overall comparison and a separate table and graph for each week.
+
 ### Driver season history
 
 Search all `eventresult` files for a driver by exact name (case-insensitive),
@@ -116,6 +133,7 @@ python3 generate_stats_page.py --year 2026
 
 The generator reads `results/<year>/week<number>/...`, uses each result CSV's
 `Start Time` metadata to label one- or two-day race weeks, and writes
-`web/<year>.html`. The Jinja2 template is `web/stats_template.html`; override
-the input directory, template, or output path with `--input-dir`, `--template`,
-or `--output`.
+`web/<year>.html`. The page includes team-entry participation by day and timeslot
+above the weekly accordion and a per-week comparison in each accordion. The Jinja2
+template is `web/stats_template.html`; override the input directory, template,
+or output path with `--input-dir`, `--template`, or `--output`.

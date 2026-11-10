@@ -11,6 +11,12 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
+        <style>
+            #timeslotParticipation,
+            [id^="timeslotParticipationWeek"] {
+                --ct-bar-width: 50px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -101,6 +107,38 @@
             </div>
 
             <div class="row mt-5">
+                <div class="col">
+                    <h4>Participation by timeslot</h4>
+                    <p>Average team entries per event, grouped by start time (GMT).</p>
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Timeslot (GMT)</th>
+                                        <th scope="col">Average team entries</th>
+                                        <th scope="col">Total team entries</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for timeslot in timeslot_rows %}
+                                    <tr>
+                                        <th scope="row">{{ timeslot.day[:3] }} {{ "%s:%s GMT"|format(timeslot.timeslot[:2], timeslot.timeslot[2:]) }}</th>
+                                        <td>{{ "%.1f"|format(timeslot.average_team_entries) }}</td>
+                                        <td>{{ timeslot.total_team_entries }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <div id="timeslotParticipation" class="ct-golden-section"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
                 <h2>Week by Week</h2>
                 <div class="accordion" id="accordionYear">
                     {% for week in weeks %}
@@ -118,7 +156,7 @@
                                             <tbody>
                                                 <tr><td>Drivers:</td><td>{{ week.drivers }}</td></tr>
                                                 <tr><td>Unique Drivers:</td><td>{{ week.unique_drivers }}</td></tr>
-                                                <tr><td>Teams:</td><td>{{ week.teams }}</td></tr>
+                                                <tr><td>Participation:</td><td>{{ week.participation }}</td></tr>
                                                 <tr><td>Splits:</td><td>{{ week.splits }}</td></tr>
                                                 <tr><td>Laps:</td><td>{{ week.laps }}</td></tr>
                                                 <tr><td>Incidents:</td><td>{{ week.incidents }} ({{ "%.2f"|format(week.incidents_per_lap) }}x per lap)</td></tr>
@@ -174,6 +212,32 @@
                                 </div>
                                 {% if not loop.last %}<hr>{% endif %}
                                 {% endfor %}
+
+                                <h3>Participation by timeslot</h3>
+                                <p>Average team entries per timeslot.</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Timeslot (GMT)</th>
+                                                    <th scope="col">Total team entries</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for timeslot in week.timeslot_rows %}
+                                                <tr>
+                                                    <th scope="row">{{ timeslot.day[:3] }} {{ "%s:%s GMT"|format(timeslot.timeslot[:2], timeslot.timeslot[2:]) }}</th>
+                                                    <td>{{ timeslot.total_team_entries }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col">
+                                        <div id="timeslotParticipationWeek{{ week.number }}" class="ct-golden-section"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,7 +247,7 @@
         </div>
 
         <script type="module">
-            import { lineChart } from './libs/chartist_v2.min.js';
+            import { barChart, lineChart } from './libs/chartist_v2.min.js';
             import { tooltips } from './libs/chartist_v2-tooltips.min.js';
 
             lineChart(
@@ -202,6 +266,24 @@
                 },
                 { plugins: [tooltips()] }
             );
+            barChart(
+                '#timeslotParticipation',
+                {
+                    labels: {{ timeslot_labels|tojson }},
+                    series: {{ timeslot_participation_series|tojson }}
+                },
+                { plugins: [tooltips()] }
+            );
+            {% for week in weeks %}
+            barChart(
+                '#timeslotParticipationWeek{{ week.number }}',
+                {
+                    labels: {{ week.timeslot_labels|tojson }},
+                    series: {{ week.timeslot_participation_series|tojson }}
+                },
+                { plugins: [tooltips()] }
+            );
+            {% endfor %}
         </script>
         <script src="libs/bootstrap_v5.3.8.min.js"></script>
     </body>
