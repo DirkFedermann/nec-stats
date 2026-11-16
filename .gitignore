@@ -220,4 +220,6 @@ __marimo__/
 .streamlit/secrets.toml
 
 # don't commit personalized data from the results csv
-results/*
+results/**
+!results/*/
+!results/*/bop.csv

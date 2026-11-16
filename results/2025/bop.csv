@@ -1,0 +1,119 @@
+week,car,power,fuel,weight
+1,Audi R8 LMS EVO II GT3,99.5,100,0
+1,BMW M4 GT3,98.25,98,0
+1,Ferrari 296 GT3,99,99,0
+1,Ford Mustang GT3,99,99,0
+1,Lamborghini Huracán GT3 EVO,99.5,100,0
+1,Mercedes-AMG GT3 2020,97.75,98,0
+1,Aston Martin Vantage GT4,98,99,0
+1,BMW M4 G82 GT4,97.5,99,0
+1,Mercedes-AMG GT4,97.5,99,0
+1,Audi RS 3 LMS TCR,99,100,0
+1,Honda Civic Type R TCR,99,100,0
+1,Hyundai Elantra N TCR,99,100,0
+2,Audi R8 LMS EVO II GT3,99.5,100,10
+2,BMW M4 GT3,98.5,98,5
+2,Ferrari 296 GT3,99,98,0
+2,Ford Mustang GT3,99.25,98,0
+2,Lamborghini Huracán GT3 EVO,99.25,100,10
+2,Mercedes-AMG GT3 2020,98,97,0
+2,Aston Martin Vantage GT4,98,99,0
+2,BMW M4 G82 GT4,98,100,0
+2,Mercedes-AMG GT4,97.75,99,0
+2,Audi RS 3 LMS TCR,99,100,0
+2,Honda Civic Type R TCR,99,100,0
+2,Hyundai Elantra N TCR,99,100,0
+3,Audi R8 LMS EVO II GT3,99.75,100,5
+3,BMW M4 GT3,98.25,98,5
+3,Ferrari 296 GT3,99,98,0
+3,Ford Mustang GT3,99.75,99,0
+3,Lamborghini Huracán GT3 EVO,99.75,100,5
+3,Mercedes-AMG GT3 2020,98,97,5
+3,Aston Martin Vantage GT4,98,99,0
+3,BMW M4 G82 GT4,97,99,0
+3,Mercedes-AMG GT4,97,99,0
+3,Audi RS 3 LMS TCR,99,100,0
+3,Honda Civic Type R TCR,99,100,0
+3,Hyundai Elantra N TCR,99,100,0
+4,Audi R8 LMS EVO II GT3,99.75,99,0
+4,BMW M4 GT3,98,98,5
+4,Ferrari 296 GT3,99.5,98,0
+4,Ford Mustang GT3,98.5,99,3
+4,Lamborghini Huracán GT3 EVO,99.75,99,0
+4,Mercedes-AMG GT3 2020,98.5,98,5
+4,Porsche 911 GT3 R (992),100,99,3
+4,Aston Martin Vantage GT4,98.25,98,0
+4,BMW M4 G82 GT4,97.5,98,7
+4,Mercedes-AMG GT4,97,99,0
+4,Porsche 718 Cayman GT4 Clubsport MR,100,99,5
+4,Audi RS 3 LMS TCR,98.75,100,0
+4,Honda Civic Type R TCR,99,100,0
+4,Hyundai Elantra N TCR,98.75,100,0
+5,Audi R8 LMS EVO II GT3,100,99,0
+5,BMW M4 GT3,98,98,5
+5,Ferrari 296 GT3,99.75,98,0
+5,Ford Mustang GT3,97.5,98,5
+5,Lamborghini Huracán GT3 EVO,99,100,0
+5,Mercedes-AMG GT3 2020,98.75,98,3
+5,Porsche 911 GT3 R (992),100,99,3
+5,Aston Martin Vantage GT4,98.25,98,0
+5,BMW M4 G82 GT4,97.5,98,7
+5,Mercedes-AMG GT4,97.75,98,0
+5,Porsche 718 Cayman GT4 Clubsport MR,100,99,5
+5,Audi RS 3 LMS TCR,98.75,100,0
+5,Honda Civic Type R TCR,99,100,0
+5,Hyundai Elantra N TCR,98.75,100,0
+6,Audi R8 LMS EVO II GT3,100,99,0
+6,BMW M4 GT3,98,98,5
+6,Ferrari 296 GT3,99.75,98,0
+6,Ford Mustang GT3,97.25,98,5
+6,Lamborghini Huracán GT3 EVO,99,100,0
+6,Mercedes-AMG GT3 2020,98.75,98,3
+6,Porsche 911 GT3 R (992),100,99,3
+6,Aston Martin Vantage GT4,98.25,98,0
+6,BMW M4 G82 GT4,97.5,98,7
+6,Mercedes-AMG GT4,97.75,98,0
+6,Porsche 718 Cayman GT4 Clubsport MR,100,99,5
+6,Audi RS 3 LMS TCR,98.75,100,0
+6,Honda Civic Type R TCR,99,100,0
+6,Hyundai Elantra N TCR,98.75,100,0
+7,Audi R8 LMS EVO II GT3,100,99,0
+7,BMW M4 GT3,98,98,8
+7,Ferrari 296 GT3,99.75,98,0
+7,Ford Mustang GT3,97.75,98,15
+7,Lamborghini Huracán GT3 EVO,99,100,0
+7,Mercedes-AMG GT3 2020,98.75,99,3
+7,Porsche 911 GT3 R (992),100,99,3
+7,Aston Martin Vantage GT4,98.25,99,0
+7,BMW M4 G82 GT4,97.5,100,7
+7,Mercedes-AMG GT4,97.75,99,0
+7,Porsche 718 Cayman GT4 Clubsport MR,100,100,5
+7,Audi RS 3 LMS TCR,98.75,100,0
+7,Honda Civic Type R TCR,99,100,0
+7,Hyundai Elantra N TCR,98.75,100,0
+8,Audi R8 LMS EVO II GT3,100,99,0
+8,BMW M4 GT3,98,98,8
+8,Ferrari 296 GT3,99.75,98,0
+8,Ford Mustang GT3,97.75,98,15
+8,Lamborghini Huracán GT3 EVO,99,100,0
+8,Mercedes-AMG GT3 2020,98.75,99,3
+8,Aston Martin Vantage GT4,99.75,99,0
+8,BMW M4 G82 GT4,98.5,100,5
+8,Mercedes-AMG GT4,99,99,0
+8,Porsche 718 Cayman GT4 Clubsport MR,99.5,100,5
+8,Audi RS 3 LMS TCR,98.75,100,0
+8,Honda Civic Type R TCR,99,100,0
+8,Hyundai Elantra N TCR,98.75,100,0
+9,Audi R8 LMS EVO II GT3,100,99,0
+9,BMW M4 GT3,98,98,8
+9,Ferrari 296 GT3,99.75,98,0
+9,Ford Mustang GT3,97.75,98,15
+9,Lamborghini Huracán GT3 EVO,99,100,0
+9,Mercedes-AMG GT3 2020,98.75,99,3
+9,Aston Martin Vantage GT4,100,99,0
+9,BMW M4 G82 GT4,98.75,100,5
+9,Mercedes-AMG GT4,99.5,99,0
+9,Porsche 718 Cayman GT4 Clubsport MR,99,100,5
+9,Audi RS 3 LMS TCR,98.75,100,0
+9,Honda Civic Type R TCR,99,100,0
+9,Hyundai Elantra N TCR,98.75,100,0
